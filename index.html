@@ -126,69 +126,48 @@
       animation-delay: 0.4s;
     }
 
-    /* Update the Hero Section gradient */
+    /* Update the gradient styles */
+    /* Hero Section - Soft mint to sky gradient */
     section.hero {
-      background: linear-gradient(135deg, #a7f3d0 0%, #93c5fd 100%);
+      background: linear-gradient(135deg, #c7f2e3 0%, #bae6fd 100%);
     }
 
-    /* Update How It Works Section */
+    /* How It Works Section - Soft peach to lavender */
     section.how-it-works {
-      background: linear-gradient(135deg, #ddd6fe 0%, #e0e7ff 100%);
+      background: linear-gradient(135deg, #fde4cf 0%, #ddd6fe 100%);
     }
 
-    /* Update Dashboard Previews Section */
+    /* Dashboard Previews Section - Soft rose to soft blue */
     section.dashboard-previews {
-      background: linear-gradient(135deg, #fae8ff 0%, #ede9fe 100%);
+      background: linear-gradient(135deg, #fce7f3 0%, #dbeafe 100%);
     }
 
-    /* Update Features Section */
+    /* Features Section - Soft yellow to mint */
     section.features {
-      background: linear-gradient(135deg, #bfdbfe 0%, #c7d2fe 100%);
+      background: linear-gradient(135deg, #fef3c7 0%, #d1fae5 100%);
     }
 
-    /* Update individual feature cards */
+    /* Update card gradients for better contrast */
     .bg-white {
-      background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(243, 244, 246, 0.8));
+      background: linear-gradient(145deg, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.85));
       backdrop-filter: blur(10px);
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      border: 1px solid rgba(255, 255, 255, 0.3);
     }
 
-    .bg-white:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
-    }
-
+    /* Update stat boxes */
     .stat-box {
-      background: linear-gradient(145deg, rgba(255, 255, 255, 0.9), rgba(243, 244, 246, 0.8));
-      backdrop-filter: blur(10px);
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      transition: transform 0.3s ease;
-    }
-
-    .stat-box:hover {
-      transform: translateY(-5px);
-      background: linear-gradient(145deg, rgba(255, 255, 255, 0.95), rgba(243, 244, 246, 0.85));
-    }
-
-    .dashboard-card {
-      background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(243, 244, 246, 0.8));
+      background: linear-gradient(145deg, rgba(255, 255, 255, 0.9), rgba(249, 250, 251, 0.8));
       backdrop-filter: blur(8px);
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      transition: all 0.3s ease;
     }
 
-    .dashboard-card:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 12px 25px rgba(0, 0, 0, 0.1);
-    }
-
+    /* Update feature icons */
     .feature-icon {
-      background: linear-gradient(135deg, #4F46E5 0%, #6366F1 100%);
+      background: linear-gradient(135deg, #06b6d4 0%, #0ea5e9 100%);
     }
 
+    /* Update active tab buttons */
     .tab-btn.active {
-      background: linear-gradient(135deg, #4F46E5 0%, #6366F1 100%);
+      background: linear-gradient(135deg, #06b6d4 0%, #0ea5e9 100%);
     }
   </style>
 </head>
@@ -775,8 +754,7 @@
                       class="bg-gray-100 text-gray-700 px-3 py-1.5 rounded text-sm !rounded-button whitespace-nowrap">
                       <i class="ri-store-line mr-1"></i> Store Info
                     </button>
-                    <button
-                      class="bg-blue-500 text-white px-3 py-1.5 rounded text-sm !rounded-button whitespace-nowrap">
+                    <button class="bg-blue-500 text-white px-3 py-1.5 rounded text-sm !rounded-button whitespace-nowrap">
                       <i class="ri-shopping-bag-line mr-1"></i> Picked Up
                     </button>
                   </div>
