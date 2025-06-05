@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orders - ClearX</title>
+
+    <head href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+        <script src="https://cdn.tailwindcss.com"></script>
+        <script>
+            tailwind.config = {
+                theme: {
+                    extend: {
+                        colors: {
+                            primary: '#0F766E',
+                            secondary: '#EC4899'
+                        }
+                    }
+                }
+            }
+        </script>
+    </head>
+
+<body class="bg-gray-50">
+    <header class="bg-white shadow-sm">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <a href="index.html" class="text-primary text-2xl font-['Pacifico']">ClearX</a>
+            <nav class="hidden md:flex space-x-8">
+                <a href="retail.html" class="text-gray-600 hover:text-primary flex items-center">
+                    <i class="ri-store-2-line mr-2"></i>
+                    Products
+                </a>
+                <a href="orders.html" class="text-primary flex items-center">
+                    <i class="ri-shopping-cart-2-line mr-2"></i>
+                    Orders
+                </a>
+                <a href="analytics.html" class="text-gray-600 hover:text-primary flex items-center">
+                    <i class="ri-line-chart-line mr-2"></i>
+                    Analytics
+                </a>
+            </nav>
+            <div class="flex items-center space-x-6">
+                <button class="relative w-10 h-10 flex items-center justify-center text-gray-600 hover:text-primary">
+                    <i class="ri-notification-3-line ri-lg"></i>
+                    <span class="absolute top-0 right-0 w-2 h-2 bg-red-500 rounded-full"></span>
+                </button>
+                <div class="relative">
+                    <button id="profile-button" class="w-10 h-10 flex items-center justify-center">
+                        <img src="https://ui-avatars.com/api/?name=John+Doe" class="w-8 h-8 rounded-full">
+                    </button>
+                    <div id="profile-dropdown"
+                        class="hidden absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg z-10">
+                        <a href="profile.html"
+                            class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Profile</a>
+                        <a href="settings.html"
+                            class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Settings</a>
+                        <a href="retail.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">My
+                            Store</a>
+                        <button onclick="signOut()"
+                            class="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Sign
+                            out</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 py-8">
+        <div class="flex justify-between items-center mb-8">
+            <h1 class="text-2xl font-bold text-gray-900">Orders</h1>
+            <div class="flex space-x-4">
+                <select
+                    class="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary">
+                    <option value="all">All Orders</option>
+                    <option value="pending">Pending</option>
+                    <option value="processing">Processing</option>
+                    <option value="completed">Completed</option>
+                    <option value="cancelled">Cancelled</option>
+                </select>
+                <input type="date"
+                    class="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary">
+            </div>
+        </div>
+
+        <div class="bg-white rounded-xl shadow-sm overflow-hidden">
+            <div class="overflow-x-auto">
+                <table class="w-full">
+                    <thead>
+                        <tr class="bg-gray-50 border-b border-gray-200">
+                            <th class="px-6 py-4 text-left text-sm font-medium text-gray-500">Order ID</th>
+                            <th class="px-6 py-4 text-left text-sm font-medium text-gray-500">Customer</th>
+                            <th class="px-6 py-4 text-left text-sm font-medium text-gray-500">Products</th>
+                            <th class="px-6 py-4 text-left text-sm font-medium text-gray-500">Total</th>
+                            <th class="px-6 py-4 text-left text-sm font-medium text-gray-500">Status</th>
+                            <th class="px-6 py-4 text-left text-sm font-medium text-gray-500">Date</th>
+                            <th class="px-6 py-4 text-left text-sm font-medium text-gray-500">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-200">
+                        <tr>
+                            <td class="px-6 py-4 text-sm text-gray-900">#ORD-2023-001</td>
+                            <td class="px-6 py-4">
+                                <div class="flex items-center">
+                                    <img src="https://ui-avatars.com/api/?name=Sarah+Smith"
+                                        class="w-8 h-8 rounded-full mr-3">
+                                    <div>
+                                        <p class="text-sm font-medium text-gray-900">Sarah Smith</p>
+                                        <p class="text-xs text-gray-500">sarah@example.com</p>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4 text-sm text-gray-500">Organic Vegetable Bundle x2</td>
+                            <td class="px-6 py-4 text-sm font-medium text-gray-900">₹4,098</td>
+                            <td class="px-6 py-4">
+                                <span class="px-3 py-1 text-xs font-medium rounded-full bg-yellow-100 text-yellow-800">
+                                    Processing
+                                </span>
+                            </td>
+                            <td class="px-6 py-4 text-sm text-gray-500">Jun 4, 2025</td>
+                            <td class="px-6 py-4"> <button onclick="showOrderDetails('#ORD-2023-001')"
+                                    class="text-primary hover:text-primary/80">View Details</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-4 text-sm text-gray-900">#ORD-2023-002</td>
+                            <td class="px-6 py-4">
+                                <div class="flex items-center">
+                                    <img src="https://ui-avatars.com/api/?name=Mike+Johnson"
+                                        class="w-8 h-8 rounded-full mr-3">
+                                    <div>
+                                        <p class="text-sm font-medium text-gray-900">Mike Johnson</p>
+                                        <p class="text-xs text-gray-500">mike@example.com</p>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4 text-sm text-gray-500">Fresh Dairy Pack x1, Artisan Bread x3</td>
+                            <td class="px-6 py-4 text-sm font-medium text-gray-900">₹7,376</td>
+                            <td class="px-6 py-4">
+                                <span class="px-3 py-1 text-xs font-medium rounded-full bg-green-100 text-green-800">
+                                    Completed
+                                </span>
+                            </td>
+                            <td class="px-6 py-4 text-sm text-gray-500">Jun 3, 2025</td>
+                            <td class="px-6 py-4">
+                                <button onclick="showOrderDetails('#ORD-2023-002')"
+                                    class="text-primary hover:text-primary/80">View Details</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-4 text-sm text-gray-900">#ORD-2023-003</td>
+                            <td class="px-6 py-4">
+                                <div class="flex items-center">
+                                    <img src="https://ui-avatars.com/api/?name=Emma+Davis"
+                                        class="w-8 h-8 rounded-full mr-3">
+                                    <div>
+                                        <p class="text-sm font-medium text-gray-900">Emma Davis</p>
+                                        <p class="text-xs text-gray-500">emma@example.com</p>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4 text-sm text-gray-500">Organic Vegetable Bundle x1</td>
+                            <td class="px-6 py-4 text-sm font-medium text-gray-900">₹2,049</td>
+                            <td class="px-6 py-4">
+                                <span class="px-3 py-1 text-xs font-medium rounded-full bg-red-100 text-red-800">
+                                    Cancelled
+                                </span>
+                            </td>
+                            <td class="px-6 py-4 text-sm text-gray-500">Jun 2, 2025</td>
+                            <td class="px-6 py-4">
+                                <button onclick="showOrderDetails('#ORD-2023-003')"
+                                    class="text-primary hover:text-primary/80">View Details</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="px-6 py-4 border-t border-gray-200">
+                <div class="flex items-center justify-between">
+                    <p class="text-sm text-gray-700">Showing 1 to 3 of 50 entries</p>
+                    <div class="flex space-x-2">
+                        <button
+                            class="px-3 py-1 border border-gray-300 rounded-lg text-sm text-gray-700 hover:bg-gray-50">Previous</button>
+                        <button
+                            class="px-3 py-1 border border-gray-300 rounded-lg text-sm text-gray-700 hover:bg-gray-50">Next</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Order Details Modal -->
+    <div id="order-details-modal" class="fixed inset-0 bg-gray-900/50 hidden items-center justify-center z-50">
+        <div class="bg-white rounded-xl shadow-lg max-w-3xl w-full max-h-[90vh] overflow-y-auto m-4">
+            <div class="p-6 border-b border-gray-200">
+                <div class="flex items-center justify-between">
+                    <h2 class="text-xl font-semibold text-gray-900">Order Details</h2>
+                    <button onclick="closeOrderModal()" class="text-gray-500 hover:text-gray-700">
+                        <i class="ri-close-line ri-lg"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="p-6">
+                <div class="grid grid-cols-2 gap-6 mb-6">
+                    <div>
+                        <h3 class="text-sm font-medium text-gray-500 mb-1">Order ID</h3>
+                        <p id="modal-order-id" class="text-gray-900 font-medium"></p>
+                    </div>
+                    <div>
+                        <h3 class="text-sm font-medium text-gray-500 mb-1">Date</h3>
+                        <p id="modal-date" class="text-gray-900"></p>
+                    </div>
+                    <div>
+                        <h3 class="text-sm font-medium text-gray-500 mb-1">Status</h3>
+                        <p id="modal-status"></p>
+                    </div>
+                    <div>
+                        <h3 class="text-sm font-medium text-gray-500 mb-1">Total Amount</h3>
+                        <p id="modal-total" class="text-gray-900 font-medium"></p>
+                    </div>
+                </div>
+                <div class="mb-6">
+                    <h3 class="text-sm font-medium text-gray-500 mb-3">Customer Details</h3>
+                    <div class="flex items-center">
+                        <img id="modal-customer-image" class="w-12 h-12 rounded-full mr-4">
+                        <div>
+                            <p id="modal-customer-name" class="text-gray-900 font-medium"></p>
+                            <p id="modal-customer-email" class="text-gray-500 text-sm"></p>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="text-sm font-medium text-gray-500 mb-3">Products</h3>
+                    <div class="border rounded-lg divide-y">
+                        <div id="modal-products"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="p-6 border-t border-gray-200 flex justify-end space-x-4">
+                <button onclick="closeOrderModal()"
+                    class="px-4 py-2 text-gray-700 border border-gray-300 rounded-lg hover:bg-gray-50">
+                    Close
+                </button>
+                <button id="modal-action-button" class="px-4 py-2 text-white bg-primary rounded-lg hover:bg-primary/90">
+                    Update Status
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Sign Out Function
+        function signOut() {
+            // Clear any user session/data
+            localStorage.removeItem('user');
+            sessionStorage.removeItem('user');
+
+            // Redirect to index page
+            window.location.href = 'index.html';
+        }
+
+        // Profile Dropdown Toggle
+        const profileButton = document.getElementById('profile-button');
+        const profileDropdown = document.getElementById('profile-dropdown');
+
+        profileButton.addEventListener('click', () => {
+            profileDropdown.classList.toggle('hidden');
+        });
+
+        document.addEventListener('click', (e) => {
+            if (!profileButton.contains(e.target) && !profileDropdown.contains(e.target)) {
+                profileDropdown.classList.add('hidden');
+            }
+        });
+
+        // Order Details Modal Functions
+        const orderDetailsModal = document.getElementById('order-details-modal');
+
+        function showOrderDetails(orderId) {
+            // Get order data based on orderId
+            const orderData = getOrderData(orderId);
+
+            // Populate modal with order data
+            document.getElementById('modal-order-id').textContent = orderData.orderId;
+            document.getElementById('modal-date').textContent = orderData.date;
+            document.getElementById('modal-status').innerHTML = `
+                <span class="px-3 py-1 text-xs font-medium rounded-full ${getStatusStyle(orderData.status)}">
+                    ${orderData.status}
+                </span>
+            `;
+            document.getElementById('modal-total').textContent = orderData.total;
+            document.getElementById('modal-customer-image').src = orderData.customerImage;
+            document.getElementById('modal-customer-name').textContent = orderData.customerName;
+            document.getElementById('modal-customer-email').textContent = orderData.customerEmail;
+
+            // Populate products
+            const productsContainer = document.getElementById('modal-products');
+            productsContainer.innerHTML = orderData.products.map(product => `
+                <div class="p-4 flex items-center justify-between">
+                    <div>
+                        <p class="text-gray-900 font-medium">${product.name}</p>
+                        <p class="text-gray-500 text-sm">Quantity: ${product.quantity}</p>
+                    </div>
+                    <p class="text-gray-900 font-medium">₹${product.price}</p>
+                </div>
+            `).join('');
+
+            // Show modal
+            orderDetailsModal.classList.remove('hidden');
+            orderDetailsModal.classList.add('flex');
+        }
+
+        function closeOrderModal() {
+            orderDetailsModal.classList.remove('flex');
+            orderDetailsModal.classList.add('hidden');
+        }
+
+        function getStatusStyle(status) {
+            const styles = {
+                'Processing': 'bg-yellow-100 text-yellow-800',
+                'Completed': 'bg-green-100 text-green-800',
+                'Cancelled': 'bg-red-100 text-red-800',
+                'Pending': 'bg-blue-100 text-blue-800'
+            };
+            return styles[status] || '';
+        }
+
+        // Mock function to get order data - replace with actual data fetching logic
+        function getOrderData(orderId) {
+            // This is mock data - replace with actual data fetching
+            const mockOrders = {
+                '#ORD-2023-001': {
+                    orderId: '#ORD-2023-001',
+                    date: 'Jun 4, 2025',
+                    status: 'Processing',
+                    total: '₹4,098',
+                    customerImage: 'https://ui-avatars.com/api/?name=Sarah+Smith',
+                    customerName: 'Sarah Smith',
+                    customerEmail: 'sarah@example.com',
+                    products: [
+                        {
+                            name: 'Organic Vegetable Bundle',
+                            quantity: 2,
+                            price: '2,049'
+                        }
+                    ]
+                },
+                '#ORD-2023-002': {
+                    orderId: '#ORD-2023-002',
+                    date: 'Jun 3, 2025',
+                    status: 'Completed',
+                    total: '₹7,376',
+                    customerImage: 'https://ui-avatars.com/api/?name=Mike+Johnson',
+                    customerName: 'Mike Johnson',
+                    customerEmail: 'mike@example.com',
+                    products: [
+                        {
+                            name: 'Fresh Dairy Pack',
+                            quantity: 1,
+                            price: '1,499'
+                        },
+                        {
+                            name: 'Artisan Bread',
+                            quantity: 3,
+                            price: '1,959'
+                        }
+                    ]
+                },
+                '#ORD-2023-003': {
+                    orderId: '#ORD-2023-003',
+                    date: 'Jun 2, 2025',
+                    status: 'Cancelled',
+                    total: '₹2,049',
+                    customerImage: 'https://ui-avatars.com/api/?name=Emma+Davis',
+                    customerName: 'Emma Davis',
+                    customerEmail: 'emma@example.com',
+                    products: [
+                        {
+                            name: 'Organic Vegetable Bundle',
+                            quantity: 1,
+                            price: '2,049'
+                        }
+                    ]
+                }
+            };
+            return mockOrders[orderId];
+        }
+    </script>
+</body>
+
+</html>

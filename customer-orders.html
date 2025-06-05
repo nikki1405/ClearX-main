@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Orders - ClearX</title>
+    <script src="https://cdn.tailwindcss.com/3.4.16"></script>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet" />
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #e0f2fe 0%, #dbeafe 50%, #f0f9ff 100%);
+            min-height: 100vh;
+            color: #334155;
+        }
+
+        .bg-white {
+            background: linear-gradient(to bottom right, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.8));
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .bg-white:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
+        }
+
+        .gradient-button {
+            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+            transition: opacity 0.2s;
+        }
+
+        .gradient-button:hover {
+            opacity: 0.9;
+        }
+
+        /* Modal styling */
+        #orderDetailsModal .bg-white {
+            transform: none !important;
+        }
+
+        /* Filter button styling */
+        .filter-button {
+            background: linear-gradient(to bottom right, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.8));
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            transition: all 0.2s;
+        }
+
+        .filter-button:hover {
+            background: linear-gradient(to bottom right, rgba(255, 255, 255, 0.98), rgba(255, 255, 255, 0.9));
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+
+        /* Pagination button styling */
+        .pagination-button {
+            background: linear-gradient(to bottom right, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.8));
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            transition: all 0.2s;
+        }
+
+        .pagination-button:hover {
+            background: linear-gradient(to bottom right, rgba(255, 255, 255, 0.98), rgba(255, 255, 255, 0.9));
+            transform: translateY(-1px);
+        }
+
+        .pagination-button.active {
+            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+        }
+    </style>
+</head>
+
+<body>
+    <header class="bg-white shadow-sm">
+        <div class="container mx-auto px-4 h-[70px] flex items-center justify-between">
+            <a href="customer1.html" class="text-2xl font-['Pacifico'] text-primary">ClearX</a>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 py-8">
+        <div class="max-w-4xl mx-auto">
+            <div class="flex justify-between items-center mb-6">
+                <h1 class="text-2xl font-semibold">My Orders</h1>
+
+                <!-- Filter Dropdown -->
+                <div class="relative"> <button
+                        class="filter-button flex items-center gap-2 px-4 py-2 rounded-md shadow-sm">
+                        <span>Filter by</span>
+                        <i class="ri-arrow-down-s-line"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Order List -->
+            <div class="space-y-4"> <!-- Order Item -->
+                <div class="bg-white rounded-lg shadow p-6" data-order-id="1234">
+                    <div class="flex justify-between items-start mb-4">
+                        <div>
+                            <h3 class="font-medium">Order #1234</h3>
+                            <p class="text-sm text-gray-500">Placed on April 15, 2025</p>
+                        </div>
+                        <span class="px-3 py-1 bg-green-100 text-green-700 rounded-full text-sm">Delivered</span>
+                    </div>
+
+                    <div class="flex flex-col md:flex-row gap-6">
+                        <div class="flex-1">
+                            <!-- Order Items -->
+                            <div class="space-y-4">
+                                <div class="flex gap-4">
+                                    <img src="https://images.unsplash.com/photo-1560806887-1e4cd0b6cbd6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&h=300&q=80"
+                                        alt="Product" class="w-20 h-20 object-cover rounded">
+                                    <div>
+                                        <h4 class="font-medium">Organic Red Apples</h4>
+                                        <p class="text-sm text-gray-500">Quantity: 2</p>
+                                        <p class="text-primary">₹359</p>
+                                    </div>
+                                </div>
+                                <div class="flex gap-4">
+                                    <img src="https://images.unsplash.com/photo-1563636619-e9143da7973b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&h=300&q=80"
+                                        alt="Product" class="w-20 h-20 object-cover rounded">
+                                    <div>
+                                        <h4 class="font-medium">Organic Whole Milk</h4>
+                                        <p class="text-sm text-gray-500">Quantity: 1</p>
+                                        <p class="text-primary">₹299</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="w-full md:w-64">
+                            <h4 class="font-medium mb-2">Order Summary</h4>
+                            <div class="space-y-2 text-sm">
+                                <div class="flex justify-between">
+                                    <span class="text-gray-600">Subtotal</span>
+                                    <span>₹1017</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-gray-600">Delivery</span>
+                                    <span>₹99</span>
+                                </div>
+                                <div class="flex justify-between font-medium pt-2 border-t">
+                                    <span>Total</span>
+                                    <span>₹1116</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flex gap-4 mt-6 pt-6 border-t">
+                        <button
+                            class="flex items-center gap-2 px-4 py-2 bg-primary text-white rounded hover:bg-primary/90 gradient-button">
+                            <i class="ri-repeat-line"></i>
+                            <span>Reorder</span>
+                        </button>
+                        <button class="flex items-center gap-2 px-4 py-2 border rounded hover:bg-gray-50">
+                            <i class="ri-file-list-3-line"></i>
+                            <span>View Details</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Order Item -->
+                <div class="bg-white rounded-lg shadow p-6" data-order-id="1233">
+                    <div class="flex justify-between items-start mb-4">
+                        <div>
+                            <h3 class="font-medium">Order #1233</h3>
+                            <p class="text-sm text-gray-500">Placed on April 12, 2025</p>
+                        </div>
+                        <span class="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-sm">In Transit</span>
+                    </div>
+
+                    <div class="flex flex-col md:flex-row gap-6">
+                        <div class="flex-1">
+                            <!-- Order Items -->
+                            <div class="space-y-4">
+                                <div class="flex gap-4">
+                                    <img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&h=300&q=80"
+                                        alt="Product" class="w-20 h-20 object-cover rounded">
+                                    <div>
+                                        <h4 class="font-medium">Artisan Sourdough Bread</h4>
+                                        <p class="text-sm text-gray-500">Quantity: 1</p>
+                                        <p class="text-primary">₹419</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="w-full md:w-64">
+                            <h4 class="font-medium mb-2">Order Summary</h4>
+                            <div class="space-y-2 text-sm">
+                                <div class="flex justify-between">
+                                    <span class="text-gray-600">Subtotal</span>
+                                    <span>₹419</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-gray-600">Delivery</span>
+                                    <span>₹99</span>
+                                </div>
+                                <div class="flex justify-between font-medium pt-2 border-t">
+                                    <span>Total</span>
+                                    <span>₹518</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flex gap-4 mt-6 pt-6 border-t">
+                        <button
+                            class="flex items-center gap-2 px-4 py-2 bg-primary text-white rounded hover:bg-primary/90 gradient-button">
+                            <i class="ri-map-pin-line"></i>
+                            <span>Track Order</span>
+                        </button>
+                        <button class="flex items-center gap-2 px-4 py-2 border rounded hover:bg-gray-50">
+                            <i class="ri-file-list-3-line"></i>
+                            <span>View Details</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="flex justify-center mt-8">
+            <div class="flex items-center gap-2">
+                <button
+                    class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-200 text-gray-600 hover:bg-gray-300 pagination-button">
+                    <i class="ri-arrow-left-s-line"></i>
+                </button>
+                <button class="w-10 h-10 flex items-center justify-center rounded-full bg-primary text-white active">
+                    1
+                </button>
+                <button
+                    class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-200 text-gray-600 hover:bg-gray-300 pagination-button">
+                    2
+                </button>
+                <button
+                    class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-200 text-gray-600 hover:bg-gray-300 pagination-button">
+                    3
+                </button>
+                <span class="text-gray-400">...</span>
+                <button
+                    class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-200 text-gray-600 hover:bg-gray-300 pagination-button">
+                    8
+                </button>
+                <button
+                    class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-200 text-gray-600 hover:bg-gray-300">
+                    <i class="ri-arrow-right-s-line"></i>
+                </button>
+            </div>
+        </div>
+        </div>
+    </main>
+
+    <!-- Order Details Modal -->
+    <div id="orderDetailsModal" class="fixed inset-0 bg-black/50 hidden z-50 overflow-y-auto">
+        <div class="min-h-screen px-4 text-center">
+            <!-- This element is to trick the browser into centering the modal contents. -->
+            <span class="inline-block h-screen align-middle" aria-hidden="true">&#8203;</span>
+
+            <div class="inline-block w-full max-w-3xl p-6 my-8 text-left align-middle bg-white rounded-lg shadow-lg">
+                <div class="overflow-y-auto max-h-[calc(100vh-8rem)]">
+                    <div class="flex justify-between items-start mb-6">
+                        <div>
+                            <h2 class="text-xl font-semibold">Order Details</h2>
+                            <p class="text-sm text-gray-500" id="orderDate"></p>
+                        </div>
+                        <button onclick="closeOrderDetails()" class="text-gray-400 hover:text-gray-600">
+                            <i class="ri-close-line text-2xl"></i>
+                        </button>
+                    </div>
+
+                    <div class="space-y-6">
+                        <!-- Order Status Timeline -->
+                        <div class="border-b pb-6">
+                            <h3 class="font-medium mb-4">Order Status</h3>
+                            <div class="flex items-center gap-2" id="orderStatus">
+                                <div class="flex-1">
+                                    <div class="flex items-center">
+                                        <div
+                                            class="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center text-green-500">
+                                            <i class="ri-check-line"></i>
+                                        </div>
+                                        <div class="h-1 flex-1 bg-green-100">
+                                            <div class="h-full bg-green-500" style="width: 100%;"></div>
+                                        </div>
+                                    </div>
+                                    <p class="text-sm mt-1">Order Placed</p>
+                                </div>
+                                <div class="flex-1">
+                                    <div class="flex items-center">
+                                        <div
+                                            class="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center text-green-500">
+                                            <i class="ri-check-line"></i>
+                                        </div>
+                                        <div class="h-1 flex-1 bg-green-100">
+                                            <div class="h-full bg-green-500" style="width: 100%;"></div>
+                                        </div>
+                                    </div>
+                                    <p class="text-sm mt-1">Confirmed</p>
+                                </div>
+                                <div class="flex-1">
+                                    <div class="flex items-center">
+                                        <div
+                                            class="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center text-green-500">
+                                            <i class="ri-check-line"></i>
+                                        </div>
+                                        <div class="h-1 flex-1 bg-green-100">
+                                            <div class="h-full bg-green-500" style="width: 100%;"></div>
+                                        </div>
+                                    </div>
+                                    <p class="text-sm mt-1">Shipped</p>
+                                </div>
+                                <div class="flex-1">
+                                    <div class="flex items-center">
+                                        <div
+                                            class="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center text-green-500">
+                                            <i class="ri-check-line"></i>
+                                        </div>
+                                    </div>
+                                    <p class="text-sm mt-1">Delivered</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Order Items -->
+                        <div class="border-b pb-6">
+                            <h3 class="font-medium mb-4">Items</h3>
+                            <div class="space-y-4" id="orderItems">
+                                <!-- Items will be populated by JavaScript -->
+                            </div>
+                        </div>
+
+                        <!-- Shipping Details -->
+                        <div class="border-b pb-6">
+                            <h3 class="font-medium mb-4">Shipping Details</h3>
+                            <div class="grid grid-cols-2 gap-4 text-sm">
+                                <div>
+                                    <p class="text-gray-500 mb-1">Delivery Address</p>
+                                    <p class="font-medium">John Doe</p>
+                                    <p>123 Main Street</p>
+                                    <p>Apartment 4B</p>
+                                    <p>New York, NY 10001</p>
+                                </div>
+                                <div>
+                                    <p class="text-gray-500 mb-1">Shipping Method</p>
+                                    <p class="font-medium">Standard Delivery</p>
+                                    <p>Estimated Delivery: 3-5 business days</p>
+                                    <p class="text-primary">Tracking ID: CLRX1234567890</p>
+                                </div>
+                            </div>
+                        </div> <!-- Payment Details -->
+                        <div>
+                            <h3 class="font-medium mb-4">Payment Details</h3>
+                            <div class="space-y-2 text-sm">
+                                <div class="flex justify-between">
+                                    <span class="text-gray-500">Payment Method</span>
+                                    <span class="font-medium">Visa ending in 4242</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-gray-500">Subtotal</span>
+                                    <span id="modalSubtotal"></span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-gray-500">Shipping</span>
+                                    <span id="modalShipping"></span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-gray-500">Tax</span>
+                                    <span id="modalTax"></span>
+                                </div>
+                                <div class="flex justify-between pt-2 border-t font-medium">
+                                    <span>Total</span>
+                                    <span id="modalTotal"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        // Function to show order details modal
+        function showOrderDetails(orderId) {
+            const modal = document.getElementById('orderDetailsModal');
+            const orderItems = document.getElementById('orderItems');
+            const dateElement = document.getElementById('orderDate');
+            const subtotalElement = document.getElementById('modalSubtotal');
+            const shippingElement = document.getElementById('modalShipping');
+            const taxElement = document.getElementById('modalTax');
+            const totalElement = document.getElementById('modalTotal');
+
+            // Get the order container
+            const orderContainer = document.querySelector(`[data-order-id="${orderId}"]`);
+            if (!orderContainer) {
+                console.error('Order container not found');
+                return;
+            }            // Get all product items in the order - specifically from the order items section
+            const products = orderContainer.querySelectorAll('.space-y-4 > .flex.gap-4');
+
+            // Clear previous items
+            orderItems.innerHTML = '';
+
+            // Populate order items
+            products.forEach(product => {
+                // Make sure we have all required elements before accessing them
+                const nameEl = product.querySelector('h4');
+                const quantityEl = product.querySelector('.text-sm.text-gray-500');
+                const priceEl = product.querySelector('.text-primary');
+                const imgEl = product.querySelector('img');
+
+                if (!nameEl || !quantityEl || !priceEl || !imgEl) {
+                    console.warn('Skipping invalid product item');
+                    return;
+                }
+
+                const name = nameEl.textContent;
+                const quantity = quantityEl.textContent;
+                const price = priceEl.textContent;
+                const imgSrc = imgEl.src;
+
+                orderItems.innerHTML += `
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center gap-4">
+                            <img src="${imgSrc}" alt="${name}" class="w-16 h-16 object-cover rounded">
+                            <div>
+                                <h4 class="font-medium">${name}</h4>
+                                <p class="text-sm text-gray-500">${quantity}</p>
+                            </div>
+                        </div>
+                        <p class="font-medium">${price}</p>
+                    </div>
+                `;
+            });
+
+            // Set order date
+            const dateText = orderContainer.querySelector('.text-sm.text-gray-500').textContent;
+            dateElement.textContent = dateText;
+
+            // Set payment details
+            const subtotal = orderContainer.querySelector('.space-y-2 div:first-child span:last-child').textContent;
+            const shipping = orderContainer.querySelector('.space-y-2 div:nth-child(2) span:last-child').textContent;
+            const total = orderContainer.querySelector('.border-t span:last-child').textContent;
+
+            subtotalElement.textContent = subtotal;
+            shippingElement.textContent = shipping;
+
+            // Calculate and set tax (8%)
+            const subtotalValue = parseFloat(subtotal.replace('₹', ''));
+            const tax = (subtotalValue * 0.08).toFixed(2);
+            taxElement.textContent = `₹${tax}`;
+            totalElement.textContent = total;
+
+            // Get and update status
+            const status = orderContainer.querySelector('.rounded-full').textContent;
+            updateOrderStatus(status);
+
+            // Show modal
+            modal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeOrderDetails() {
+            const modal = document.getElementById('orderDetailsModal');
+            modal.classList.add('hidden');
+            document.body.style.overflow = '';
+        }
+
+        function updateOrderStatus(status) {
+            const timeline = document.getElementById('orderStatus');
+            const steps = timeline.querySelectorAll('.flex-1');
+
+            switch (status.trim()) {
+                case 'Delivered':
+                    steps.forEach((step, index) => {
+                        setStepCompleted(step, true);
+                    });
+                    break;
+
+                case 'In Transit':
+                    steps.forEach((step, index) => {
+                        if (index < 3) {
+                            setStepCompleted(step, true);
+                        } else {
+                            setStepPending(step);
+                        }
+                    });
+                    break;
+
+                case 'Cancelled':
+                    steps.forEach((step, index) => {
+                        setCancelled(step);
+                    });
+                    break;
+            }
+        } function setStepCompleted(step, showLine = true) {
+            const icon = step.querySelector('.w-8.h-8.rounded-full');
+            const line = step.querySelector('.h-1 .bg-green-500');
+            if (icon) {
+                icon.className = 'w-8 h-8 rounded-full bg-green-100 flex items-center justify-center text-green-500';
+                icon.innerHTML = '<i class="ri-check-line"></i>';
+            }
+            if (line && showLine) {
+                line.style.width = '100%';
+            }
+        }
+
+        function setStepPending(step) {
+            const icon = step.querySelector('.w-8.h-8.rounded-full');
+            const line = step.querySelector('.h-1 .bg-green-500');
+            if (icon) {
+                icon.className = 'w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center text-gray-400';
+                icon.innerHTML = '<i class="ri-loader-4-line"></i>';
+            }
+            if (line) {
+                line.style.width = '0%';
+            }
+        }
+
+        function setCancelled(step) {
+            const icon = step.querySelector('.w-8.h-8.rounded-full');
+            const line = step.querySelector('.h-1 .bg-green-500');
+            if (icon) {
+                icon.className = 'w-8 h-8 rounded-full bg-red-100 flex items-center justify-center text-red-500';
+                icon.innerHTML = '<i class="ri-close-line"></i>';
+            }
+            if (line) {
+                line.style.width = '0%';
+            }
+        }        // Initialize the view details buttons
+        document.addEventListener('DOMContentLoaded', function () {
+            const viewDetailsButtons = document.querySelectorAll('button');
+            viewDetailsButtons.forEach(button => {
+                if (button.querySelector('span')?.textContent.trim() === 'View Details') {
+                    const orderContainer = button.closest('[data-order-id]');
+                    if (orderContainer) {
+                        const orderId = orderContainer.getAttribute('data-order-id');
+                        button.addEventListener('click', () => {
+                            console.log('Button clicked for order:', orderId);
+                            showOrderDetails(orderId);
+                        });
+                    }
+                }
+            });
+
+            // Close modal when clicking outside
+            const modal = document.getElementById('orderDetailsModal');
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    closeOrderDetails();
+                }
+            });
+
+            // Close modal on escape key
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') {
+                    closeOrderDetails();
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

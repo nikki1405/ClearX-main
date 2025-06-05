@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ClearX - Settings</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com/3.4.16"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: { primary: '#5b46e5', secondary: '#10b981' },
+                    borderRadius: {
+                        'none': '0px', 'sm': '4px', DEFAULT: '8px', 'md': '12px',
+                        'lg': '16px', 'xl': '20px', '2xl': '24px', '3xl': '32px',
+                        'full': '9999px', 'button': '8px'
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body class="bg-gray-50">
+    <!-- Header -->
+    <header class="bg-white shadow-sm">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <a href="index.html" class="text-primary text-2xl font-['Pacifico']">ClearX</a>
+            <nav class="hidden md:flex space-x-8">
+                <a href="retail.html" class="text-gray-600 hover:text-primary flex items-center">
+                    <i class="ri-store-2-line mr-2"></i>
+                    Products
+                </a>
+                <a href="orders.html" class="text-gray-600 hover:text-primary flex items-center">
+                    <i class="ri-shopping-cart-2-line mr-2"></i>
+                    Orders
+                </a>
+                <a href="settings.html" class="text-gray-600 hover:text-primary flex items-center">
+                    <i class="ri-line-chart-line mr-2"></i>
+                    Analytics
+                </a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8">
+        <div class="max-w-3xl mx-auto">
+            <div class="bg-white rounded-xl shadow-md overflow-hidden">
+                <div class="p-6 border-b border-gray-200">
+                    <h1 class="text-2xl font-bold text-gray-900">Settings</h1>
+                </div>
+                <div class="p-6">
+                    <div class="space-y-6">
+                        <!-- Account Settings -->
+                        <div>
+                            <h2 class="text-lg font-bold text-gray-900 mb-4">Account Settings</h2>
+                            <div class="space-y-4">
+                                <div class="flex items-center justify-between py-3 border-b border-gray-100">
+                                    <div>
+                                        <h3 class="text-sm font-medium text-gray-900">Email Notifications</h3>
+                                        <p class="text-sm text-gray-500">Receive email updates about your store activity
+                                        </p>
+                                    </div>
+                                    <label class="relative inline-flex items-center cursor-pointer">
+                                        <input type="checkbox" class="sr-only peer" checked>
+                                        <div
+                                            class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-primary/20 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary">
+                                        </div>
+                                    </label>
+                                </div>
+                                <div class="flex items-center justify-between py-3 border-b border-gray-100">
+                                    <div>
+                                        <h3 class="text-sm font-medium text-gray-900">SMS Notifications</h3>
+                                        <p class="text-sm text-gray-500">Get instant updates via text message</p>
+                                    </div>
+                                    <label class="relative inline-flex items-center cursor-pointer">
+                                        <input type="checkbox" class="sr-only peer">
+                                        <div
+                                            class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-primary/20 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary">
+                                        </div>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Security Settings -->
+                        <div>
+                            <h2 class="text-lg font-bold text-gray-900 mb-4">Security</h2>
+                            <div class="space-y-4">
+                                <div class="flex items-center justify-between py-3 border-b border-gray-100">
+                                    <div>
+                                        <h3 class="text-sm font-medium text-gray-900">Two-Factor Authentication</h3>
+                                        <p class="text-sm text-gray-500">Add an extra layer of security to your account
+                                        </p>
+                                    </div>
+                                    <button
+                                        class="px-4 py-2 text-sm text-primary border border-primary rounded-button hover:bg-primary/10 transition">Enable</button>
+                                </div>
+                                <div class="flex items-center justify-between py-3 border-b border-gray-100">
+                                    <div>
+                                        <h3 class="text-sm font-medium text-gray-900">Change Password</h3>
+                                        <p class="text-sm text-gray-500">Update your password periodically</p>
+                                    </div>
+                                    <button
+                                        class="px-4 py-2 text-sm text-primary border border-primary rounded-button hover:bg-primary/10 transition">Update</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Store Settings -->
+                        <div>
+                            <h2 class="text-lg font-bold text-gray-900 mb-4">Store Settings</h2>
+                            <div class="space-y-4">
+                                <div class="flex items-center justify-between py-3 border-b border-gray-100">
+                                    <div>
+                                        <h3 class="text-sm font-medium text-gray-900">Store Currency</h3>
+                                        <p class="text-sm text-gray-500">Set your preferred currency</p>
+                                    </div>
+                                    <select
+                                        class="px-4 py-2 text-sm border border-gray-300 rounded focus:ring-2 focus:ring-primary focus:border-primary outline-none">
+                                        <option value="INR">₹ INR</option>
+                                        <option value="USD">$ USD</option>
+                                        <option value="EUR">€ EUR</option>
+                                    </select>
+                                </div>
+                                <div class="flex items-center justify-between py-3 border-b border-gray-100">
+                                    <div>
+                                        <h3 class="text-sm font-medium text-gray-900">Timezone</h3>
+                                        <p class="text-sm text-gray-500">Set your local timezone</p>
+                                    </div>
+                                    <select
+                                        class="px-4 py-2 text-sm border border-gray-300 rounded focus:ring-2 focus:ring-primary focus:border-primary outline-none">
+                                        <option value="IST">India (IST)</option>
+                                        <option value="UTC">UTC</option>
+                                        <option value="EST">US Eastern</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="flex justify-end space-x-4 pt-6 border-t">
+                            <button type="button"
+                                class="px-6 py-3 text-gray-700 hover:text-gray-900 font-medium rounded-button">Cancel</button>
+                            <button type="submit"
+                                class="bg-primary text-white px-6 py-3 rounded-button font-medium hover:bg-primary/90 transition">Save
+                                Changes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+
+</html>
